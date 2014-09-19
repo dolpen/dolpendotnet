@@ -1,0 +1,23 @@
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <!-- Replace this with your application id from http://appengine.google.com -->
+    <application>dolpendotnet</application>
+
+    <version>1</version>
+
+    <threadsafe>true</threadsafe>
+
+    <sessions-enabled>true</sessions-enabled>
+
+    <!-- Static-Files-Setting(All Directory : "**.ext") -->
+    <static-files>
+        <include path="**.css"/>
+        <include path="**.js"/>
+        <include path="**.png"/>
+        <include path="**.gif"/>
+        <include path="**.jpg"/>
+        <include path="**.htm"/>
+        <include path="**.swf"/>
+        <include path="/favicon.ico"/>
+        <include path="/index.html"/>
+    </static-files>
+</appengine-web-app>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+        version="2.5">
+    <display-name>dolpendotnet</display-name>
+
+
+    <!-- MOD-JPA -->
+    <filter>
+        <filter-name>JPAPersistenceFilter</filter-name>
+        <filter-class>net.dolpen.gae.libs.jpa.JPAPersistenceFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>JPAPersistenceFilter</filter-name>
+        <url-pattern>/text/*</url-pattern>
+        <url-pattern>/mml/*</url-pattern>
+    </filter-mapping>
+
+
+    <!-- Mod-Rewrite -->
+    <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/text/*</url-pattern>
+        <url-pattern>/mml/*</url-pattern>
+    </filter-mapping>
+
+
+    <!-- Root Servlet -->
+    <servlet>
+        <servlet-name>root</servlet-name>
+        <servlet-class>net.dolpen.gae.libs.servlet.DolpenRequestProcessor</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>root</servlet-name>
+        <url-pattern>/text/*</url-pattern>
+        <url-pattern>/mml/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Security -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>dbedit</web-resource-name>
+            <url-pattern>/text/create</url-pattern>
+            <url-pattern>/text/createPost</url-pattern>
+            <url-pattern>/text/edit/*</url-pattern>
+            <url-pattern>/text/editPost</url-pattern>
+            <url-pattern>/mml/create</url-pattern>
+            <url-pattern>/mml/createPost</url-pattern>
+            <url-pattern>/mml/edit/*</url-pattern>
+            <url-pattern>/mml/editPost</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+</web-app>
