@@ -35,7 +35,7 @@ public class GyazoAction {
         try {
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("text/plain");
-            resp.getWriter().println("http://dolpendotnet.appspot.com/gyazo/" + image.id);
+            resp.getWriter().println("http://www.dolpen.net/gyazo/" + image.id);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -18,6 +18,6 @@
         <button type="submit">更新</button>
     </form>
 
-    <p><a href="/text/">back to index of texts</a></p>
+    <p><a href="/text/">back to index of text</a></p>
 </div>
 

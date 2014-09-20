@@ -11,7 +11,7 @@
     <p><a href="/">back to the top</a></p>
 
 
-    <h1>dolpen.net - texts</h1>
+    <h1>dolpen.net - text</h1>
 
     <c:forEach var="e" items="${entries}" varStatus="s">
         <p>
