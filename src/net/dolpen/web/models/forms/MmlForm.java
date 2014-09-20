@@ -2,9 +2,6 @@ package net.dolpen.web.models.forms;
 
 import com.google.appengine.labs.repackaged.com.google.common.base.*;
 
-/**
- * Created by yamada on 2014/09/19.
- */
 public class MmlForm {
 
     public Integer page;

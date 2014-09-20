@@ -23,9 +23,11 @@ public class CacheEx<T> {
      * @param params parameters
      */
     @SuppressWarnings("unchecked")
-    public CacheEx(String name, int dulation, Object... params) {
+    public CacheEx(String name, int duration, Object... params) {
         Map props = new HashMap();
-        props.put(GCacheFactory.EXPIRATION_DELTA, dulation);
+        if(duration > 0) {
+            props.put(GCacheFactory.EXPIRATION_DELTA, duration);
+        }
         try {
             CacheFactory cacheFactory = CacheManager.getInstance().getCacheFactory();
             cache = cacheFactory.createCache(props);

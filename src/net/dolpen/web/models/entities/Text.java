@@ -99,8 +99,8 @@ public class Text extends JPAModel implements Serializable {
         return all(Text.class).fetch();
     }
 
-    public static List<Text> findLatest(int page) {
-        return find(Text.class, "order by createAt desc").fetch(page, 5);
+    public static List<Text> findAllOrderByLatest() {
+        return find(Text.class, "order by createAt desc").fetch(100);
     }
 
 }

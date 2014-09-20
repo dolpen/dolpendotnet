@@ -16,14 +16,10 @@
     </rule>
     <rule>
         <from>^/text/([0-9]+)/?$</from>
-        <to>/text/?page=$1</to>
-    </rule>
-    <rule>
-        <from>^/text/e/([0-9]+)/?$</from>
         <to>/text/detail?id=$1</to>
     </rule>
     <rule>
-        <from>^/text/edit/([0-9]+)/?$</from>
+        <from>^/text/([0-9]+)/edit/?$</from>
         <to>/text/edit?id=$1</to>
     </rule>
     <!-- MML Section -->
@@ -33,14 +29,10 @@
     </rule>
     <rule>
         <from>^/mml/([0-9]+)/?$</from>
-        <to>/mml/?page=$1</to>
-    </rule>
-    <rule>
-        <from>^/mml/e/([0-9]+)/?$</from>
         <to>/mml/detail?id=$1</to>
     </rule>
     <rule>
-        <from>^/mml/edit/([0-9]+)/?$</from>
+        <from>^/mml/([0-9]+)/edit/?$</from>
         <to>/mml/edit?id=$1</to>
     </rule>
     <!-- Gyazo Section -->

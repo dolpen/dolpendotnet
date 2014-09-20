@@ -1,29 +1,13 @@
 <%@ page language="java" session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<meta charset="UTF-8">
-<link href="/static/css/common.css" media="screen" rel="stylesheet" type="text/css">
-<title>dolpen.net - text</title>
-
-<div id="all">
-
-    <p><a href="/">back to the top</a></p>
-
-
-    <h1>dolpen.net - mmls</h1>
-
-    <c:forEach var="e" items="${entries}" varStatus="s">
-        <p>
-            <a href="/mml/e/${e.id}"><c:out value="${e.id}"/></a>
-            <span style='color:grey'>(<c:out value="${e.updateAt}"/>)</span>
-        </p>
-    </c:forEach>
-
-    <p>
-        <c:if test="${page > 1}">
-            <a href="/mml/${page - 1}">&lt;</a>
-        </c:if>
-        <a href="/mml/${page + 1}">&gt;</a>
-    </p>
-</div>
+<c:import url="/WEB-INF/view/common/layout.jsp">
+    <c:param name="title">mml</c:param>
+    <c:param name="header">dolpen.net - mml</c:param>
+    <c:param name="content">
+        <c:forEach var="e" items="${entries}" varStatus="s">
+            <p>
+                <a href="/mml/${e.id}"><c:out value="${e.updateAt}"/></a>
+            </p>
+        </c:forEach>
+    </c:param>
+</c:import>

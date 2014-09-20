@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
  */
 public class GyazoAction {
     static final String CACHE_ENTRY_KEY = "gyazo-entry";
-    static final int CACHE_DULATION = 60 * 60 * 24;
+    static final int CACHE_DURATION = 60 * 60 * 24; // 1hour
 
     public String index(HttpServletRequest req, HttpServletResponse resp) {
         if (!req.getMethod().toLowerCase().equals("post")) return "";
@@ -30,7 +30,7 @@ public class GyazoAction {
             return "";
         }
         Image image = Image.create(form.imagedata);
-        CacheEx<Image> cache = new CacheEx<>(CACHE_ENTRY_KEY, CACHE_DULATION, form.id);
+        CacheEx<Image> cache = new CacheEx<>(CACHE_ENTRY_KEY, CACHE_DURATION, form.id);
         cache.set(image);
         try {
             resp.setCharacterEncoding("UTF-8");
@@ -45,7 +45,7 @@ public class GyazoAction {
     public String download(HttpServletRequest req, HttpServletResponse resp) {
         final GyazoForm form = Forms.of(GyazoForm.class).bindFromRequest(req);
         if (form.id == null) return "";
-        CacheEx<Image> cache = new CacheEx<>(CACHE_ENTRY_KEY, CACHE_DULATION, form.id);
+        CacheEx<Image> cache = new CacheEx<>(CACHE_ENTRY_KEY, CACHE_DURATION, form.id);
         Image image = cache.getOrElse(new Callable<Image>() {
             @Override
             public Image call() throws Exception {
@@ -57,8 +57,8 @@ public class GyazoAction {
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("image/png");
             resp.setHeader("Last-Modified", TimeUtils.toRFC1123Format(image.createAt, 0));
-            resp.setHeader("Expires", TimeUtils.toRFC1123Format(image.createAt, CACHE_DULATION * 1000));
-            resp.setHeader("Cache-Control", "public, max-age=" + CACHE_DULATION);
+            resp.setHeader("Expires", TimeUtils.toRFC1123Format(image.createAt, CACHE_DURATION * 1000));
+            resp.setHeader("Cache-Control", "public, max-age=" + CACHE_DURATION);
             resp.getOutputStream().write(image.getFile());
             resp.flushBuffer();
         } catch (IOException e) {
