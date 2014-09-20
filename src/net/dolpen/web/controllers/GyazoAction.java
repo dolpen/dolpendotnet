@@ -2,6 +2,7 @@ package net.dolpen.web.controllers;
 
 import net.dolpen.gae.libs.cache.CacheEx;
 import net.dolpen.gae.libs.servlet.Forms;
+import net.dolpen.gae.libs.utils.TimeUtils;
 import net.dolpen.web.models.entities.Image;
 import net.dolpen.web.models.forms.GyazoForm;
 
@@ -15,7 +16,7 @@ import java.util.concurrent.Callable;
  */
 public class GyazoAction {
     static final String CACHE_ENTRY_KEY = "gyazo-entry";
-    static final int CACHE_DULATION = 3600;
+    static final int CACHE_DULATION = 60 * 60 * 24;
 
     public String index(HttpServletRequest req, HttpServletResponse resp) {
         if (!req.getMethod().toLowerCase().equals("post")) return "";
@@ -35,7 +36,8 @@ public class GyazoAction {
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("text/plain");
             resp.getWriter().println("http://dolpendotnet.appspot.com/gyazo/" + image.id);
-        } catch (IOException e) {e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return "";
     }
@@ -54,6 +56,9 @@ public class GyazoAction {
         try {
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("image/png");
+            resp.setHeader("Last-Modified", TimeUtils.toRFC1123Format(image.createAt, 0));
+            resp.setHeader("Expires", TimeUtils.toRFC1123Format(image.createAt, CACHE_DULATION * 1000));
+            resp.setHeader("Cache-Control", "public, max-age=" + CACHE_DULATION);
             resp.getOutputStream().write(image.getFile());
             resp.flushBuffer();
         } catch (IOException e) {
