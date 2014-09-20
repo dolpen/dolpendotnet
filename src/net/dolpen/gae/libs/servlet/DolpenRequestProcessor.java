@@ -120,21 +120,21 @@ public class DolpenRequestProcessor extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doResp(HttpServletRequest req, HttpServletResponse resp) {
         String forward = doExec(req, resp);
-        Iterator<Entry<String, String[]>> iter = req.getParameterMap().entrySet().iterator();
-        while (iter.hasNext()) {
-            Entry<String, String[]> e = iter.next();
-            if (e.getValue().length == 1) {
-                req.setAttribute(e.getKey(), e.getValue()[0]);
-            } else {
-                req.setAttribute(e.getKey(), e.getValue());
-            }
-        }
         if (Strings.isNullOrEmpty(forward))
             return;
         if (forward.endsWith("?redirect")) {
             Forwards.redirect(forward.split("\\?redirect")[0], resp);
         }
         if (forward.endsWith(".jsp")) {
+            Iterator<Entry<String, String[]>> iter = req.getParameterMap().entrySet().iterator();
+            while (iter.hasNext()) {
+                Entry<String, String[]> e = iter.next();
+                if (e.getValue().length == 1) {
+                    req.setAttribute(e.getKey(), e.getValue()[0]);
+                } else {
+                    req.setAttribute(e.getKey(), e.getValue());
+                }
+            }
             Forwards.forward(forward, req, resp);
         }
     }

@@ -10,6 +10,7 @@ import org.apache.commons.fileupload.util.Streams;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -54,7 +55,6 @@ public class Forms<T> {
             return bindFromRequest(req);
         }
         T obj = blankInstance();
-
         ServletFileUpload upload = new ServletFileUpload();
         upload.setFileSizeMax(MAX_FILE_SIZE);
         upload.setSizeMax(MAX_FILE_SIZE);
@@ -65,12 +65,7 @@ public class Forms<T> {
                 FileItemStream item = itemIterator.next();
                 String key = item.getFieldName();
                 InputStream stream = item.openStream();
-                if (item.isFormField()) {
-                    setProperty(obj, key, new String[]{Streams.asString(stream)});
-                } else {
-                    System.out.println("detect "+key+" as file");
-                    setFile(obj, key, stream);
-                }
+                setStream(obj, key, stream);
             }
         } catch (Exception e) {
         }
@@ -90,13 +85,17 @@ public class Forms<T> {
         }
     }
 
-    private void setFile(Object obj, String name, InputStream stream) {
+    private void setStream(Object obj, String name, InputStream stream) throws IOException{
         Class c = obj.getClass();
         try {
             Field f = c.getField(name);
             Class t = f.getType();
-            if (t == Blob.class)
+            if (t == Blob.class) {
                 f.set(obj, toBlob(stream));
+            } else {
+                TypeBinder tb = Binders.map.get(t);
+                if(tb!=null)f.set(obj, tb.bind(new String[]{Streams.asString(stream)}));
+            }
         } catch (NoSuchFieldException e) {
         } catch (IllegalAccessException e) {
         }

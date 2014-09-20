@@ -18,13 +18,14 @@ public class GyazoAction {
     static final int CACHE_DULATION = 3600;
 
     public String index(HttpServletRequest req, HttpServletResponse resp) {
-        if (!req.getMethod().toLowerCase().equals("post")) return upload(req, resp);
-        return "";
+        if (!req.getMethod().toLowerCase().equals("post")) return "";
+        return upload(req, resp);
     }
 
     private String upload(HttpServletRequest req, HttpServletResponse resp) {
         final GyazoForm form = Forms.of(GyazoForm.class).bindFromMultipartReequest(req);
         if (form.imagedata == null) {
+            System.out.println("no image");
             return "";
         }
         Image image = Image.create(form.imagedata);
@@ -33,9 +34,8 @@ public class GyazoAction {
         try {
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("text/plain");
-            resp.getWriter().write( "http://dolpendotnet.appspot.com/gyazo/" + image.id);
-            resp.flushBuffer();
-        } catch (IOException e) {
+            resp.getWriter().println("http://dolpendotnet.appspot.com/gyazo/" + image.id);
+        } catch (IOException e) {e.printStackTrace();
         }
         return "";
     }
