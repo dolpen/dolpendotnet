@@ -4,11 +4,6 @@ import net.dolpen.gae.libs.jpa.JPA;
 
 import javax.servlet.http.*;
 
-/**
- * ビューへのフォワード、リダイレクトを扱うユーティリティです。
- *
- * @author yamada
- */
 public class Forwards {
 
     private static final String JSP_PREFIX = "/WEB-INF/view";

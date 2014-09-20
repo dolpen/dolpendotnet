@@ -4,9 +4,6 @@ import com.google.appengine.labs.repackaged.com.google.common.collect.ImmutableM
 
 import java.util.Map;
 
-/**
- * Created by yamada on 2014/09/19.
- */
 public class Binders {
     public static class IntegerBinder implements TypeBinder<Integer> {
         @Override
@@ -36,6 +33,9 @@ public class Binders {
             return src == null || src.length == 0 ? null : src[0];
         }
     }
+
+
+
 
     public static Map<Class, TypeBinder> map = ImmutableMap.<Class, TypeBinder>builder()
             .put(String.class, new StringBinder())

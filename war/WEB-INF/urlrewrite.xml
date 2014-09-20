@@ -43,5 +43,14 @@
         <from>^/mml/edit/([0-9]+)/?$</from>
         <to>/mml/edit?id=$1</to>
     </rule>
+    <!-- Gyazo Section -->
+    <rule>
+        <from>^/gyazo$</from>
+        <to type="redirect">/gyazo/</to>
+    </rule>
+    <rule>
+        <from>^/gyazo/([0-9]+)/?$</from>
+        <to>/gyazo/download?id=$1</to>
+    </rule>
 
 </urlrewrite>

@@ -7,9 +7,6 @@ import net.sf.jsr107cache.*;
 import java.util.*;
 import java.util.concurrent.Callable;
 
-/**
- * Created by yamada on 2014/09/19.
- */
 public class CacheEx<T> {
 
     private Cache cache;

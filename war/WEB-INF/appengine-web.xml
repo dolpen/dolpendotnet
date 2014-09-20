@@ -17,7 +17,7 @@
         <include path="**.jpg"/>
         <include path="**.htm"/>
         <include path="**.swf"/>
-        <include path="/favicon.ico"/>
-        <include path="/index.html"/>
+        <include path="**.html"/>
+        <include path="**.ico"/>
     </static-files>
 </appengine-web-app>

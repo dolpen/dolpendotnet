@@ -2,9 +2,6 @@ package net.dolpen.gae.libs.jpa;
 
 import javax.persistence.*;
 
-/**
- * JPA
- */
 public class JPA {
     private static final String UNIT_NAME = "GAEDatastorePersistenceUnit";
 

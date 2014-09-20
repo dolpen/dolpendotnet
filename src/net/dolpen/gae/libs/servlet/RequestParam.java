@@ -7,11 +7,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-/**
- * Post/Getパラメータを扱うヘルパーです。
- *
- * @author yamada
- */
 public class RequestParam {
     public static final long MAX_FILE_SIZE = 50 * 1024 * 1024L;
     private Map<String, String[]> map;

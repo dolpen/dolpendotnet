@@ -4,14 +4,11 @@ import javax.persistence.Query;
 import java.sql.SQLException;
 import java.util.*;
 
-/**
- * JPAModel for parent
- */
 public class JPAModel {
 
 
     /**
-     * save(例外を処理したい場合)
+     * save
      */
     public void save() {
         JPA.em().persist(this);

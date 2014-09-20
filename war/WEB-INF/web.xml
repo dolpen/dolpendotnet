@@ -16,6 +16,7 @@
         <filter-name>JPAPersistenceFilter</filter-name>
         <url-pattern>/text/*</url-pattern>
         <url-pattern>/mml/*</url-pattern>
+        <url-pattern>/gyazo/*</url-pattern>
     </filter-mapping>
 
 
@@ -28,6 +29,7 @@
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/text/*</url-pattern>
         <url-pattern>/mml/*</url-pattern>
+        <url-pattern>/gyazo/*</url-pattern>
     </filter-mapping>
 
 
@@ -41,6 +43,7 @@
         <servlet-name>root</servlet-name>
         <url-pattern>/text/*</url-pattern>
         <url-pattern>/mml/*</url-pattern>
+        <url-pattern>/gyazo/*</url-pattern>
     </servlet-mapping>
 
     <!-- Security -->
