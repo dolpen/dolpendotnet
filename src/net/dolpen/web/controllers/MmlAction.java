@@ -22,9 +22,14 @@ public class MmlAction {
     static final int CACHE_ENTRY_DURATION = 3600;
 
     public String index(HttpServletRequest req, HttpServletResponse resp) {
-        MmlForm form = Forms.of(MmlForm.class).bindFromRequest(req);
-        req.setAttribute("entries", Mml.findLatest(form.getPage()));
-        req.setAttribute("page", form.getPage());
+        CacheEx<List<MmlItem>> cache = new CacheEx<>(CACHE_TITLES_KEY, CACHE_TITLES_DURATION);
+        List<MmlItem> mmlItems = cache.getOrElse(new Callable<List<MmlItem>>() {
+            @Override
+            public List<MmlItem> call() throws Exception {
+                return MmlItem.buildList(Mml.findAllOrderByLatest());
+            }
+        });
+        req.setAttribute("entries", mmlItems);
         return "/mml/index.jsp";
     }
 

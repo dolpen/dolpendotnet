@@ -51,13 +51,11 @@
         <web-resource-collection>
             <web-resource-name>dbedit</web-resource-name>
             <url-pattern>/text/create</url-pattern>
-            <url-pattern>/text/createPost</url-pattern>
-            <url-pattern>/text/edit/*</url-pattern>
-            <url-pattern>/text/editPost</url-pattern>
+            <url-pattern>/text/edit</url-pattern>
+            <url-pattern>/text/edit*</url-pattern>
             <url-pattern>/mml/create</url-pattern>
-            <url-pattern>/mml/createPost</url-pattern>
-            <url-pattern>/mml/edit/*</url-pattern>
-            <url-pattern>/mml/editPost</url-pattern>
+            <url-pattern>/mml/edit</url-pattern>
+            <url-pattern>/mml/edit*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>

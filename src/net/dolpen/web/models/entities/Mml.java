@@ -65,8 +65,8 @@ public class Mml extends JPAModel implements Serializable {
         return all(Mml.class).fetch();
     }
 
-    public static List<Mml> findLatest(int page) {
-        return find(Mml.class, "order by createAt desc").fetch(page, 5);
+    public static List<Mml> findAllOrderByLatest() {
+        return find(Mml.class, "order by createAt desc").fetch(100);
     }
 
 }
